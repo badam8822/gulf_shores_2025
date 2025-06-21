@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Along the Way – Gulf Shores</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fdfdfd;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+    }
+    .map-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .map-container img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .hotspot {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: red;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+    }
+    .tooltip {
+      position: absolute;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: none;
+      width: 200px;
+      z-index: 10;
+    }
+    .tooltip h3 {
+      margin: 8px 0 4px;
+      font-size: 1em;
+    }
+    .tooltip p {
+      font-size: 0.85em;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧭 Along the Way: Gulf Shores Road Trip</h1>
+  <div class="map-container">
+    <img src="along_the_way_map.png" alt="Interactive Route Map" />
+
+    <!-- Hotspots -->
+    <div class="hotspot" style="top: 28%; left: 22%;" data-tooltip="tooltip1"></div>
+    <div class="hotspot" style="top: 33%; left: 27%;" data-tooltip="tooltip2"></div>
+    <div class="hotspot" style="top: 38%; left: 41%;" data-tooltip="tooltip3"></div>
+    <div class="hotspot" style="top: 42%; left: 47%;" data-tooltip="tooltip4"></div>
+    <div class="hotspot" style="top: 48%; left: 54%;" data-tooltip="tooltip5"></div>
+    <div class="hotspot" style="top: 57%; left: 60%;" data-tooltip="tooltip6"></div>
+    <div class="hotspot" style="top: 67%; left: 65%;" data-tooltip="tooltip7"></div>
+    <div class="hotspot" style="top: 75%; left: 70%;" data-tooltip="tooltip8"></div>
+
+    <!-- Tooltips -->
+    <div class="tooltip" id="tooltip1" style="top: 12%; left: 28%;">
+      <h3>Dinosaur World</h3>
+      <p>Life-sized fiberglass dinos off I-65. Prehistoric fun!</p>
+    </div>
+    <div class="tooltip" id="tooltip2" style="top: 18%; left: 34%;">
+      <h3>Corvette Sinkhole</h3>
+      <p>Where 8 Corvettes fell into a massive sinkhole.</p>
+    </div>
+    <div class="tooltip" id="tooltip3" style="top: 30%; left: 47%;">
+      <h3>Giant Peach Tower</h3>
+      <p>Giant fruit-shaped water tower... or a butt?</p>
+    </div>
+    <div class="tooltip" id="tooltip4" style="top: 35%; left: 53%;">
+      <h3>Llamas on Hwy 82</h3>
+      <p>A pasture of llamas randomly appears. Yes, really.</p>
+    </div>
+    <div class="tooltip" id="tooltip5" style="top: 42%; left: 59%;">
+      <h3>Rosa Parks Statue</h3>
+      <p>Pass by Montgomery’s powerful tribute to Rosa Parks.</p>
+    </div>
+    <div class="tooltip" id="tooltip6" style="top: 52%; left: 63%;">
+      <h3>Steel Dino Skeleton</h3>
+      <p>Massive skeletal dinosaur near Bay Minette. Spotted from the road!</p>
+    </div>
+    <div class="tooltip" id="tooltip7" style="top: 63%; left: 68%;">
+      <h3>Gravity Hill</h3>
+      <p>Where your car rolls uphill. Optical illusion magic.</p>
+    </div>
+    <div class="tooltip" id="tooltip8" style="top: 72%; left: 72%;">
+      <h3>Big Shark Entrance</h3>
+      <p>Walk through a giant shark at Souvenir City. Classic!</p>
+    </div>
+  </div>
+
+  <script>
+    const hotspots = document.querySelectorAll('.hotspot');
+    hotspots.forEach(h => {
+      h.addEventListener('click', () => {
+        document.querySelectorAll('.tooltip').forEach(t => t.style.display = 'none');
+        const tooltip = document.getElementById(h.dataset.tooltip);
+        tooltip.style.display = 'block';
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('hotspot')) {
+        document.querySelectorAll('.tooltip').forEach(t => t.style.display = 'none');
+      }
+    });
+  </script>
+</body>
+</html>
