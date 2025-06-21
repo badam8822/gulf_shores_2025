@@ -2,108 +2,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Gulf Shores Family Getaway</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
             margin: 0;
-            padding: 0;
-            background: #fff;
-            color: #333;
-        }
-        .container {
             padding: 20px;
-            max-width: 700px;
-            margin: auto;
+            background: #fdfdfd;
+            color: #333;
         }
         h1 {
             text-align: center;
-            margin-bottom: 0;
+            font-size: 1.8em;
         }
         h2 {
-            color: #0070f3;
+            font-size: 1.4em;
             margin-top: 40px;
         }
-        .date-range {
+        .trip-date {
             text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            color: #666;
         }
-        .trip-image {
+        .day-section {
+            margin: 30px auto;
+            max-width: 700px;
+        }
+        .day-section img {
             width: 100%;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
         }
         ul {
             padding-left: 20px;
         }
         li {
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
-        .full-itinerary {
+        .button-wrapper {
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
-        .full-itinerary a img {
-            width: 300px;
-            border-radius: 12px;
+        .button-wrapper img {
+            width: 260px;
+            cursor: pointer;
+        }
+        a {
+            color: #0077cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🌴 Gulf Shores Family Getaway</h1>
-        <p class="date-range">August 27 – September 1, 2025</p>
-        <div class="full-itinerary">
-            <a href="full_itinerary_gulf_shores.html">
-                <img src="gulf_shores_assets/Coastal Road Trip Adventure.png" alt="Full Itinerary Button">
-            </a>
-        </div>
+    <h1>🌴 Gulf Shores Family Getaway</h1>
+    <p class="trip-date">August 27 – September 1, 2025</p>
+    <div class="button-wrapper">
+        <a href="full_itinerary_gulf_shores.html">
+            <img src="Coastal Road Trip Adventure.png" alt="Full Itinerary">
+        </a>
+    </div>
 
-        <h2>Aug 27: New Albany → Gatlinburg</h2>
-        <img src="gulf_shores_assets/gatlinburg.jpg" alt="Gatlinburg" class="trip-image">
+    <div class="day-section">
+        <h2>Aug 27: New Albany → <a href="https://www.gatlinburg.com/">Gatlinburg</a></h2>
+        <img src="gatlinburg.jpg" alt="Gatlinburg">
         <ul>
             <li><a href="https://www.josies-ky.com">Breakfast at Josie’s Café in Lexington</a></li>
             <li><a href="https://www.margaritavilleresorts.com/margaritaville-resort-gatlinburg">Check-in at Margaritaville Resort Gatlinburg</a></li>
             <li><a href="https://www.ripleyaquariums.com/gatlinburg/">Visit Ripley’s Aquarium</a></li>
             <li><a href="https://www.bigdaddyspizzeria.net/">Dinner at Big Daddy’s Pizzeria</a></li>
         </ul>
+    </div>
 
-        <h2>Aug 28: Travel to Gulf Shores</h2>
-        <img src="gulf_shores_assets/Birmingham.jpeg" alt="Birmingham" class="trip-image">
+    <div class="day-section">
+        <h2>Aug 28: Travel to <a href="https://www.gulfshores.com/">Gulf Shores</a></h2>
+        <img src="Birmingham.jpeg" alt="Birmingham">
         <ul>
             <li><a href="https://www.martinsbbqjoint.com/birmingham">Lunch at Martin’s BBQ in Birmingham</a></li>
-            <li><a href="https://www.paparocco.com">Dinner at Papa Rocco’s</a></li>
+            <li><a href="https://www.paparocco.com">Dinner at Papa Rocco’s in Gulf Shores</a></li>
         </ul>
+    </div>
 
+    <div class="day-section">
         <h2>Aug 29: Beach & Zoo Day</h2>
-        <img src="gulf_shores_assets/Gulf Shores.jpeg" alt="Gulf Shores Beach" class="trip-image">
+        <img src="Gulf Shores.jpeg" alt="Gulf Shores Beach">
         <ul>
-            <li><a href="https://www.alabamagulfcoastzoo.org/">Visit the Alabama Gulf Coast Zoo</a></li>
+            <li>Beach time</li>
+            <li><a href="https://www.alzoo.org/">Visit the Alabama Gulf Coast Zoo</a></li>
+            <li><a href="https://www.rubyslippercafe.net/">Breakfast at Ruby Slipper Café</a></li>
         </ul>
+    </div>
 
-        <h2>Aug 30: Dolphin Cruise & Mini Golf</h2>
-        <img src="gulf_shores_assets/cetacian cruises.jpg" alt="Dolphin Cruise" class="trip-image">
+    <div class="day-section">
+        <h2>Aug 30: Dolphin Cruise & Ice Cream</h2>
+        <img src="cetacian cruises.jpg" alt="Dolphin Cruise">
         <ul>
-            <li><a href="https://cetaceancruises.com/">Dolphin Cruise with Cetacean Cruises</a></li>
-            <li><a href="https://funatthetrack.com/pages/gulf-shores-location">Mini Golf at The Track</a></li>
+            <li><a href="https://cetaceancruises.com/">Dolphin cruise with Cetacean Cruises</a></li>
+            <li><a href="https://www.gulfshores.com/restaurants/ice-cream/matts-homemade-alabama-ice-cream/">Ice cream at Matt’s Homemade</a></li>
         </ul>
+    </div>
 
-        <h2>Aug 31: Water Park & Sunset</h2>
-        <img src="gulf_shores_assets/sunset gulf shores.jpg" alt="Gulf Shores Sunset" class="trip-image">
+    <div class="day-section">
+        <h2>Aug 31: Sunset & Gulf State Park</h2>
+        <img src="sunset gulf shores.jpg" alt="Gulf Shores Sunset">
         <ul>
-            <li><a href="https://watervilleusa.com/tickets/">Day at Waterville USA Water Park</a></li>
-            <li><a href="https://www.gulfshores.com/restaurants/fan-favorite-breakfast/the-ruby-slipper-cafe/">Breakfast at Ruby Slipper Café</a></li>
-            <li><a href="https://www.gulfshores.com/restaurants/ice-cream/matts-homemade-alabama-ice-cream/">Dessert at Matt’s Homemade Ice Cream</a></li>
+            <li>Beach morning</li>
+            <li><a href="https://www.gulfshores.com/things-to-do/recreation/gulf-state-park/">Explore Gulf State Park</a></li>
+            <li><a href="https://funatthetrack.com/pages/gulf-shores-location">The Track for mini golf</a></li>
+            <li><a href="https://watervilleusa.com/tickets/">Waterville USA water park</a></li>
         </ul>
+    </div>
 
-        <h2>Sep 1: Gulf Shores → Nashville → New Albany</h2>
-        <img src="gulf_shores_assets/nashville.jpg" alt="Nashville" class="trip-image">
+    <div class="day-section">
+        <h2>Sep 1: Return via <a href="https://www.visitmusiccity.com/">Nashville</a></h2>
+        <img src="nashville.jpg" alt="Nashville">
         <ul>
-            <li>Drive back through Nashville, walk Broadway</li>
+            <li>Breakfast and explore Broadway in Nashville</li>
             <li>Return home to New Albany</li>
         </ul>
     </div>
