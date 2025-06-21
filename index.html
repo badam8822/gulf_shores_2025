@@ -101,7 +101,7 @@
     </div>
   </a>
 
- <!-- Packing (visually larger + manually aligned to bottom) -->
+<!-- Packing (visually larger + nudged down independently) -->
 <a href="packing.html">
   <div style="
     height: 200px; 
@@ -110,15 +110,14 @@
     justify-content: center; 
     align-items: center; 
     overflow: hidden;
-    margin-top: 25px;  /* 👈 Manually push it down more */
   ">
     <img src="packing_button_final.png" alt="Packing List" 
-      style="max-height: 130%; max-width: 130%; transition: transform 0.25s ease;"
+      style="max-height: 130%; max-width: 130%; transition: transform 0.25s ease;
+             transform: translateY(18px);"  <!-- 👈 Adjust this number to move the image down -->
       onmouseover="this.style.transform='scale(1.1)'" 
-      onmouseout="this.style.transform='scale(1)'">
+      onmouseout="this.style.transform='translateY(15px)'">
   </div>
 </a>
-
 </div>
 <div class="day-section">
 <h2>Aug 27: New Albany → <a href="https://www.gatlinburg.com/">Gatlinburg</a></h2>
