@@ -101,7 +101,7 @@
     </div>
   </a>
 
-<!-- Packing (visually larger + nudged down independently) -->
+<!-- Packing (visually larger + manually nudged down with hover fix) -->
 <a href="packing.html">
   <div style="
     height: 200px; 
@@ -112,10 +112,9 @@
     overflow: hidden;
   ">
     <img src="packing_button_final.png" alt="Packing List" 
-      style="max-height: 130%; max-width: 130%; transition: transform 0.25s ease;
-             transform: translateY(18px);"  <!-- 👈 Adjust this number to move the image down -->
-      onmouseover="this.style.transform='scale(1.1)'" 
-      onmouseout="this.style.transform='translateY(15px)'">
+      style="max-height: 130%; max-width: 130%; transform: translateY(18px); transition: transform 0.25s ease;"
+      onmouseover="this.style.transform='translateY(18px) scale(1.1)'" 
+      onmouseout="this.style.transform='translateY(18px)'">
   </div>
 </a>
 </div>
