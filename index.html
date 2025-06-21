@@ -101,16 +101,15 @@
     </div>
   </a>
 
-  <!-- Packing (30% larger visually + aligned baseline) -->
+ <!-- Packing (30% larger visually + aligned bottom box text) -->
 <a href="packing.html">
   <div style="
     height: 200px; 
     width: 200px; 
     display: flex; 
     justify-content: center; 
-    align-items: center; 
+    align-items: flex-end;  /* 👈 anchor image to bottom instead of center */
     overflow: hidden;
-    margin-top: 15px; /* Push down slightly for visual alignment */
   ">
     <img src="packing_button_final.png" alt="Packing List" 
       style="max-height: 130%; max-width: 130%; transition: transform 0.25s ease;"
