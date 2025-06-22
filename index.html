@@ -64,26 +64,41 @@
 </div>
 <div class="button-wrapper" style="
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
-  align-items: flex-end;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  flex-grow: 0;
+  overflow-x: auto;
+  padding: 10px 0;
 ">
+
   <!-- Full Itinerary -->
-<a href="full_itinerary_gulf_shores.html">
-  <div style="
-    height: 175px; 
-    width: 175px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    overflow: visible;
-  ">
+  <a href="full_itinerary_gulf_shores.html" style="display: block; width: 120px;">
     <img src="full_itinerary_button_final.png" alt="Full Itinerary" 
-      style="max-height: 100%; max-width: 100%; transition: transform 0.25s ease;"
-      onmouseover="this.style.transform='scale(1.1)'" 
-      onmouseout="this.style.transform='scale(1)'">
-  </div>
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'" 
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+
+  <!-- Along the Way -->
+  <a href="along_the_way.html" style="display: block; width: 120px;">
+    <img src="along_the_way_button_final.png" alt="Along the Way" 
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'" 
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+
+  <!-- Packing -->
+  <a href="packing.html" style="display: block; width: 120px;">
+    <img src="packing_button_final.png" alt="Packing List" 
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'" 
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+
+</div>
 </a>
 
 <!-- Along the Way -->
