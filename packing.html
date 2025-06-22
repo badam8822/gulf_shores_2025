@@ -6,46 +6,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Packing List</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      background: #fdfdfd;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .columns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-    }
-    .column {
-      flex: 1 1 400px;
-      max-width: 500px;
-    }
-    h2 {
-      margin-top: 20px;
-      border-bottom: 1px solid #ccc;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    li {
-      margin-bottom: 6px;
-    }
-    label {
-      cursor: pointer;
-    }
-    input[type="checkbox"] {
-      margin-right: 8px;
-    }
-  </style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #fff7e6, #e0f7ff); /* Sand to sky */
+    color: #333;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
+  }
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+  }
+  .column {
+    flex: 1 1 400px;
+    max-width: 500px;
+  }
+  h2 {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  label {
+    cursor: pointer;
+  }
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+</style>
 </head>
 <body>
+<!-- Large Top Button (Packing) -->
+<div style="text-align: center; margin-top: 10px;">
+  <a href="packing.html">
+    <img src="packing_button_final.png" alt="Packing List"
+         style="width: 375px; max-width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'"
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+</div>
+
+<!-- Row of Smaller Navigation Buttons -->
+<div class="button-wrapper" style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  flex-grow: 0;
+  overflow-x: auto;
+  padding: 10px 0;
+  margin-bottom: 30px;
+">
+  <!-- Home (Header Logo) -->
+  <a href="index.html" style="display: block; width: 120px;">
+    <img src="Header Logo.png" alt="Home"
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'"
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+
+  <!-- Full Itinerary -->
+  <a href="full_itinerary_gulf_shores.html" style="display: block; width: 120px;">
+    <img src="full_itinerary_button_final.png" alt="Full Itinerary"
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'"
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+
+  <!-- Along the Way -->
+  <a href="along_the_way.html" style="display: block; width: 120px;">
+    <img src="along_the_way_button_final.png" alt="Along the Way"
+         style="width: 100%; height: auto; transition: transform 0.25s ease;"
+         onmouseover="this.style.transform='scale(1.1)'"
+         onmouseout="this.style.transform='scale(1)'">
+  </a>
+</div>
   <h1>🧳 Packing Checklist</h1>
   <div class="columns">
     <div class="column">
