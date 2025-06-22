@@ -56,6 +56,55 @@
   </style>
 </head>
 <body>
+  <!-- Large Top Button -->
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="along_the_way.html">
+      <img src="along_the_way_button_final.png" alt="Along the Way" 
+           style="width: 375px; max-width: 100%; height: auto; transition: transform 0.25s ease;" 
+           onmouseover="this.style.transform='scale(1.1)'" 
+           onmouseout="this.style.transform='scale(1)'">
+    </a>
+  </div>
+
+  <!-- Row of Smaller Navigation Buttons -->
+  <div class="button-wrapper" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    flex-grow: 0;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 30px;
+  ">
+    <!-- Home (Header Logo) -->
+    <a href="index.html" style="display: block; width: 120px;">
+      <img src="Header Logo.png" alt="Home"
+           style="width: 100%; height: auto; transition: transform 0.25s ease;"
+           onmouseover="this.style.transform='scale(1.1)'"
+           onmouseout="this.style.transform='scale(1)'">
+    </a>
+
+    <!-- Full Itinerary -->
+    <a href="full_itinerary_gulf_shores.html" style="display: block; width: 120px;">
+      <img src="full_itinerary_button_final.png" alt="Full Itinerary"
+           style="width: 100%; height: auto; transition: transform 0.25s ease;"
+           onmouseover="this.style.transform='scale(1.1)'"
+           onmouseout="this.style.transform='scale(1)'">
+    </a>
+
+    <!-- Packing -->
+    <a href="packing.html" style="display: block; width: 120px;">
+      <img src="packing_button_final.png" alt="Packing List"
+           style="width: 100%; height: auto; transition: transform 0.25s ease;"
+           onmouseover="this.style.transform='scale(1.1)'"
+           onmouseout="this.style.transform='scale(1)'">
+    </a>
+  </div>
+
+  <!-- Existing Page Content -->
   <h1>🧭 Along the Way: Gulf Shores Road Trip</h1>
   <div class="map-container">
     <img src="along_the_way_map.png" alt="Interactive Route Map" />
