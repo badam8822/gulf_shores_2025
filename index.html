@@ -103,70 +103,44 @@
 </div>
 </a>
 </div>
-<div class="day-section">
-<h2>Aug 27: New Albany → <a href="https://www.gatlinburg.com/">Gatlinburg</a></h2>
-<a href="https://en.wikipedia.org/wiki/Gatlinburg,_Tennessee" target="_blank">
-<img alt="Gatlinburg" src="gatlinburg.jpg"/>
-</a>
-<ul>
-<li><a href="https://www.josies-ky.com" target="_blank">Breakfast at Josie’s Café in Lexington</a></li>
-<li><a href="https://www.margaritavilleresorts.com/margaritaville-resort-gatlinburg" target="_blank">Check-in at Margaritaville Resort Gatlinburg</a></li>
-<li><a href="https://www.ripleyaquariums.com/gatlinburg/" target="_blank">Visit Ripley’s Aquarium</a></li>
-<li><a href="https://www.bigdaddyspizzeria.net/" target="_blank">Dinner at Big Daddy’s Pizzeria</a></li>
-</ul>
-</div>
-<div class="day-section">
-<h2>Aug 28: Travel to <a href="https://www.gulfshores.com/">Gulf Shores</a></h2>
-<a href="https://en.wikipedia.org/wiki/Birmingham,_Alabama" target="_blank">
-<img alt="Birmingham" src="Birmingham.jpeg"/>
-</a>
-<ul>
-<li><a href="https://www.martinsbbqjoint.com/birmingham" target="_blank">Lunch at Martin’s BBQ in Birmingham</a></li>
-<li><a href="https://www.paparocco.com" target="_blank">Dinner at Papa Rocco’s in Gulf Shores</a></li>
-</ul>
-</div>
-<div class="day-section">
-<h2>Aug 29: Beach &amp; Zoo Day</h2>
-<a href="https://en.wikipedia.org/wiki/Gulf_Shores,_Alabama" target="_blank">
-<img alt="Gulf Shores Beach" src="Gulf Shores.jpeg"/>
-</a>
-<ul>
-<li>Beach time</li>
-<li><a href="https://www.alabamagulfcoastzoo.com" target="_blank">Visit the Alabama Gulf Coast Zoo</a></li>
-<li><a href="https://www.gulfshores.com/restaurants/fan-favorite-breakfast/the-ruby-slipper-cafe/" target="_blank">Breakfast at Ruby Slipper Café</a></li>
-</ul>
-</div>
-<div class="day-section">
-<h2>Aug 30: Dolphin Cruise &amp; Ice Cream</h2>
-<a href="https://en.wikipedia.org/wiki/Dolphin_watching" target="_blank">
-<img alt="Dolphin Cruise" src="cetacian cruises.jpg"/>
-</a>
-<ul>
-<li><a href="https://cetaceancruises.com" target="_blank">Dolphin cruise with Cetacean Cruises</a></li>
-<li><a href="https://www.gulfshores.com/restaurants/ice-cream/matts-homemade-alabama-ice-cream/" target="_blank">Ice cream at Matt’s Homemade</a></li>
-</ul>
-</div>
-<div class="day-section">
-<h2>Aug 31: Sunset &amp; Gulf State Park</h2>
-<a href="https://en.wikipedia.org/wiki/Gulf_State_Park" target="_blank">
-<img alt="Gulf Shores Sunset" src="sunset gulf shores.jpg"/>
-</a>
-<ul>
-<li>Beach morning</li>
-<li><a href="https://www.alapark.com/parks/gulf-state-park" target="_blank">Explore Gulf State Park</a></li>
-<li><a href="https://funatthetrack.com/pages/gulf-shores-location" target="_blank">The Track for mini golf</a></li>
-<li><a href="https://watervilleusa.com/tickets/" target="_blank">Waterville USA water park</a></li>
-</ul>
-</div>
-<div class="day-section">
-<h2>Sep 1: Return via <a href="https://www.visitmusiccity.com/">Nashville</a></h2>
-<a href="https://en.wikipedia.org/wiki/Nashville,_Tennessee" target="_blank">
-<img alt="Nashville" src="nashville.jpg"/>
-</a>
-<ul>
-<li>Breakfast and explore Broadway in Nashville</li>
-<li>Return home to New Albany</li>
-</ul>
-</div>
+<section id="music-section" style="text-align:center; margin-top: 40px;">
+  <h2>🎵 Your Roadtrip Soundtrack</h2>
+  <p>Loading playlist based on your current location...</p>
+  <div id="player-container" style="margin-top: 20px;"></div>
+</section>
+
+<script>
+  const playlists = {
+    gatlinburg: "https://open.spotify.com/embed/playlist/37i9dQZF1DX1tyCD9QhIWF",     // Mountain-themed
+    birmingham: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6FeZRdFM7yW",     // Southern rock
+    gulfshores: "https://open.spotify.com/embed/playlist/37i9dQZF1DX0SM0LYsmbMT",     // Beach vibes
+    fallback: "https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0"         // General road trip
+  };
+
+  function setPlayer(url) {
+    const container = document.getElementById('player-container');
+    container.innerHTML = `<iframe src="${url}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>`;
+  }
+
+  function matchLocation(lat, lon) {
+    if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
+    if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
+    if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
+    return playlists.fallback;
+  }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const url = matchLocation(position.coords.latitude, position.coords.longitude);
+        setPlayer(url);
+      },
+      () => setPlayer(playlists.fallback)
+    );
+  } else {
+    setPlayer(playlists.fallback);
+  }
+</script>
+
 </body>
 </html>
