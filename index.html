@@ -147,8 +147,19 @@
     gap: 14px;
   }
 
-  .playlist-title strong {
+   .playlist-title strong {
     color: #ff6600;
+  }
+
+  @keyframes fadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
 
@@ -211,17 +222,34 @@
   container.innerHTML = '';
 
   const dayBuckets = {
-    "Aug 27": ["newalbany", "lexington", "gatlinburg"],
-    "Aug 28": ["birmingham", "gulfshores"],
-    "Sep 1": ["montgomery", "nashville"]
+    "🚗 Aug 27 – The Journey Begins": ["newalbany", "lexington", "gatlinburg"],
+    "🌆 Aug 28 – Roadside Rhythms": ["birmingham", "gulfshores"],
+    "🏁 Sep 1 – Cruisin' Home": ["montgomery", "nashville"]
   };
 
-  for (const [day, keys] of Object.entries(dayBuckets)) {
-    const dayHeader = document.createElement("h3");
-    dayHeader.textContent = `🎧 ${day}`;
-    dayHeader.style.marginBottom = "10px";
-    dayHeader.style.color = "#0077cc";
-    container.appendChild(dayHeader);
+  let colors = ["#fceabb", "#f8b500", "#add8e6"];
+
+  let i = 0;
+
+  for (const [dayLabel, keys] of Object.entries(dayBuckets)) {
+    const dayWrap = document.createElement("div");
+    dayWrap.style.marginBottom = "30px";
+    dayWrap.style.animation = "fadeSlide 0.6s ease forwards";
+    dayWrap.style.opacity = 0;
+
+    const dayHeader = document.createElement("div");
+    dayHeader.textContent = dayLabel;
+    dayHeader.style.background = colors[i % colors.length];
+    dayHeader.style.padding = "10px 20px";
+    dayHeader.style.borderRadius = "12px";
+    dayHeader.style.marginBottom = "15px";
+    dayHeader.style.fontSize = "1.3em";
+    dayHeader.style.fontWeight = "bold";
+    dayHeader.style.color = "#333";
+    dayHeader.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+    i++;
+
+    dayWrap.appendChild(dayHeader);
 
     keys.forEach((key) => {
       const { url, label } = playlists[key];
@@ -238,8 +266,10 @@
         </a>`;
 
       card.appendChild(title);
-      container.appendChild(card);
+      dayWrap.appendChild(card);
     });
+
+    container.appendChild(dayWrap);
   }
 }
 
