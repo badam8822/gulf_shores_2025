@@ -106,53 +106,71 @@
 <section id="music-section" style="text-align:center; margin-top: 40px;">
   <h2>🎵 Your Roadtrip Soundtrack</h2>
   <p>Loading playlist based on your current location...</p>
+  <p id="coords" style="color:#888; font-size:0.9em;"></p>
   <div id="player-container" style="margin-top: 20px;"></div>
 </section>
 
 <script>
- const playlists = {
-  newalbany: "https://open.spotify.com/embed/playlist/37i9dQZF1DWZIQ6QMQeU3v",       // Feelin' Good
-  lexington: "https://open.spotify.com/embed/playlist/37i9dQZF1DX2RxBh64BHjQ",       // Acoustic Chill
-  nashville: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWv6MSZULLBi",       // Indie Twang
-  montgomery: "https://open.spotify.com/embed/playlist/37i9dQZF1DXd9rSDyQguIk",      // Southern Soul BBQ
-  gatlinburg: "https://open.spotify.com/embed/playlist/37i9dQZF1DX1tyCD9QhIWF",      // Mountain Vibes
-  birmingham: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6FeZRdFM7yW",      // Southern Rock
-  gulfshores: "https://open.spotify.com/embed/playlist/37i9dQZF1DX0SM0LYsmbMT",      // Beach Vibes
-  fallback: "https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0"         // General Roadtrip
-};
+  const playlists = {
+    newalbany: "https://open.spotify.com/embed/playlist/37i9dQZF1DWZIQ6QMQeU3v",       // Feelin' Good
+    lexington: "https://open.spotify.com/embed/playlist/37i9dQZF1DX2RxBh64BHjQ",       // Acoustic Chill
+    nashville: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWv6MSZULLBi",       // Indie Twang
+    montgomery: "https://open.spotify.com/embed/playlist/37i9dQZF1DXd9rSDyQguIk",      // Southern Soul BBQ
+    gatlinburg: "https://open.spotify.com/embed/playlist/37i9dQZF1DX1tyCD9QhIWF",      // Mountain Vibes
+    birmingham: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6FeZRdFM7yW",      // Southern Rock
+    gulfshores: "https://open.spotify.com/embed/playlist/37i9dQZF1DX0SM0LYsmbMT",      // Beach Vibes
+    fallback: "https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0"         // General Roadtrip
+  };
 
   function setPlayer(url) {
     const container = document.getElementById('player-container');
     const link = url.replace('/embed', ''); // Convert to non-embed version
-container.innerHTML = `
-  <iframe src="${url}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
-  <div style="margin-top: 15px;">
-    <a href="${link}" target="_blank">
-      <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 200px; max-width: 90%; cursor: pointer;">
-    </a>
-  </div>`;
+
+    container.innerHTML = `
+      <iframe src="${url}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
+      <div style="margin-top: 15px;">
+        <a href="${link}" target="_blank">
+          <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 200px; max-width: 90%; cursor: pointer;">
+        </a>
+      </div>`;
   }
 
- function matchLocation(lat, lon) {
-  if (lat > 38.2 && lat < 38.4 && lon > -85.9 && lon < -85.5) return playlists.newalbany;
-  if (lat > 38.0 && lat < 38.1 && lon > -84.6 && lon < -84.4) return playlists.lexington;
-  if (lat > 36.0 && lat < 36.2 && lon > -86.9 && lon < -86.6) return playlists.nashville;
-  if (lat > 32.3 && lat < 32.5 && lon > -86.4 && lon < -86.1) return playlists.montgomery;
-  if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
-  if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
-  if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
-  return playlists.fallback;
-}
+  function matchLocation(lat, lon) {
+    console.log(`Detected location: lat=${lat}, lon=${lon}`);
+    const coordsElement = document.getElementById("coords");
+    if (coordsElement) {
+      coordsElement.innerText = `Detected location: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+    }
+
+    if (lat > 38.2 && lat < 38.4 && lon > -85.9 && lon < -85.5) return playlists.newalbany;
+    if (lat > 38.0 && lat < 38.1 && lon > -84.6 && lon < -84.4) return playlists.lexington;
+    if (lat > 36.0 && lat < 36.2 && lon > -86.9 && lon < -86.6) return playlists.nashville;
+    if (lat > 32.3 && lat < 32.5 && lon > -86.4 && lon < -86.1) return playlists.montgomery;
+    if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
+    if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
+    if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
+
+    return playlists.fallback;
+  }
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const url = matchLocation(position.coords.latitude, position.coords.longitude);
-        setPlayer(url);
+        if (url) {
+          setPlayer(url);
+        } else {
+          console.warn("No matching location. Using fallback.");
+          setPlayer(playlists.fallback);
+        }
       },
-      () => setPlayer(playlists.fallback)
+      () => {
+        console.warn("Geolocation failed. Using fallback.");
+        setPlayer(playlists.fallback);
+      }
     );
   } else {
+    console.warn("Geolocation not supported. Using fallback.");
     setPlayer(playlists.fallback);
   }
 </script>
