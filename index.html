@@ -165,34 +165,46 @@
   }
 
   function renderAllPlaylists(matchingKey) {
-    const container = document.getElementById('player-container');
-    container.innerHTML = '';
+  const container = document.getElementById('player-container');
+  container.innerHTML = '';
 
-    Object.keys(playlists).forEach((key) => {
-      const { url, label } = playlists[key];
-      const isCurrent = key === matchingKey;
-      const row = document.createElement('div');
-      row.style.display = "flex";
-      row.style.alignItems = "center";
-      row.style.justifyContent = "center";
-      row.style.gap = "12px";
-      row.style.marginBottom = "10px";
-      row.style.flexWrap = "wrap";
+  // Correct travel order for your trip
+  const orderedKeys = [
+    "newalbany",    // Start
+    "lexington",    // Brunch
+    "gatlinburg",   // Overnight stop
+    "birmingham",   // Lunch stop
+    "gulfshores",   // Beach destination
+    "montgomery",   // Return breakfast
+    "nashville",    // Return stop
+    "fallback"      // Default
+  ];
 
-      const text = document.createElement('span');
-      text.textContent = `${isCurrent ? '⭐ ' : ''}${label}`;
-      text.style.fontWeight = isCurrent ? "bold" : "normal";
+  orderedKeys.forEach((key) => {
+    const { url, label } = playlists[key];
+    const isCurrent = key === matchingKey;
+    const row = document.createElement('div');
+    row.style.display = "flex";
+    row.style.alignItems = "center";
+    row.style.justifyContent = "center";
+    row.style.gap = "12px";
+    row.style.marginBottom = "10px";
+    row.style.flexWrap = "wrap";
 
-      const button = document.createElement('a');
-      button.href = url;
-      button.target = "_blank";
-      button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 28px; cursor: pointer;">`;
+    const text = document.createElement('span');
+    text.textContent = `${isCurrent ? '⭐ ' : ''}${label}`;
+    text.style.fontWeight = isCurrent ? "bold" : "normal";
 
-      row.appendChild(text);
-      row.appendChild(button);
-      container.appendChild(row);
-    });
-  }
+    const button = document.createElement('a');
+    button.href = url;
+    button.target = "_blank";
+    button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 28px; cursor: pointer;">`;
+
+    row.appendChild(text);
+    row.appendChild(button);
+    container.appendChild(row);
+  });
+}
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
