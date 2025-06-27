@@ -103,12 +103,54 @@
 </div>
 </a>
 </div>
-<section id="music-section" style="text-align:center; margin-top: 40px;">
-  <h2>🎵 Your Roadtrip Soundtrack</h2>
-  <p>Loading playlist based on your current location...</p>
-  <p id="coords" style="color:#888; font-size:0.9em;"></p>
-  <div id="player-container" style="margin-top: 20px;"></div>
+<section id="music-section" style="text-align:center; margin-top: 60px;">
+  <h2 class="pulse-heading">🎶 Your Roadtrip Soundtrack</h2>
+  <p id="coords" style="color:#666; font-size: 0.9em; margin-bottom: 20px;"></p>
+  <div id="player-container" style="display: flex; flex-direction: column; align-items: center; gap: 30px;"></div>
 </section>
+
+<style>
+  .pulse-heading {
+    animation: pulse 1.8s infinite;
+    font-size: 1.8em;
+    color: #ff6600;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .playlist-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px 25px;
+    max-width: 450px;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease;
+  }
+
+  .playlist-card:hover {
+    transform: scale(1.02);
+  }
+
+  .playlist-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .playlist-title strong {
+    color: #ff6600;
+  }
+</style>
 
 <script>
   const playlists = {
@@ -168,44 +210,37 @@
   const container = document.getElementById('player-container');
   container.innerHTML = '';
 
-  // Correct travel order for your trip
-  const orderedKeys = [
-    "newalbany",    // Start
-    "lexington",    // Brunch
-    "gatlinburg",   // Overnight stop
-    "birmingham",   // Lunch stop
-    "gulfshores",   // Beach destination
-    "montgomery",   // Return breakfast
-    "nashville",    // Return stop
-    "fallback"      // Default
-  ];
+  const dayBuckets = {
+    "Aug 27": ["newalbany", "lexington", "gatlinburg"],
+    "Aug 28": ["birmingham", "gulfshores"],
+    "Sep 1": ["montgomery", "nashville"]
+  };
 
-  orderedKeys.forEach((key) => {
-    const { url, label } = playlists[key];
-    const isCurrent = key === matchingKey;
-    const row = document.createElement('div');
-    row.style.display = "flex";
-    row.style.alignItems = "center";
-    row.style.justifyContent = "center";
-    row.style.gap = "16px";
-    row.style.marginBottom = "16px";
-    row.style.flexWrap = "wrap";
+  for (const [day, keys] of Object.entries(dayBuckets)) {
+    const dayHeader = document.createElement("h3");
+    dayHeader.textContent = `🎧 ${day}`;
+    dayHeader.style.marginBottom = "10px";
+    dayHeader.style.color = "#0077cc";
+    container.appendChild(dayHeader);
 
-    const text = document.createElement('span');
-    text.textContent = `${isCurrent ? '⭐ ' : ''}${label}`;
-    text.style.fontWeight = isCurrent ? "bold" : "600";
-    text.style.fontSize = "1.3rem";
-    text.style.color = isCurrent ? "#ff6600" : "#333";
+    keys.forEach((key) => {
+      const { url, label } = playlists[key];
+      const isCurrent = key === matchingKey;
 
-    const button = document.createElement('a');
-    button.href = url;
-    button.target = "_blank";
-    button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 42px; cursor: pointer;">`;
+      const card = document.createElement("div");
+      card.className = "playlist-card";
 
-    row.appendChild(text);
-    row.appendChild(button);
-    container.appendChild(row);
-  });
+      const title = document.createElement("div");
+      title.className = "playlist-title";
+      title.innerHTML = `${isCurrent ? "⭐ <strong>" + label + "</strong>" : label}
+        <a href="${url}" target="_blank">
+          <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 42px;">
+        </a>`;
+
+      card.appendChild(title);
+      container.appendChild(card);
+    });
+  }
 }
 
   if (navigator.geolocation) {
