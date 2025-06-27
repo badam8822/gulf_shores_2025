@@ -153,41 +153,61 @@
       coordsElement.innerText = `Detected location: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
     }
 
-    if (lat > 38.2 && lat < 38.4 && lon > -85.9 && lon < -85.5) return playlists.newalbany;
-    if (lat > 38.0 && lat < 38.1 && lon > -84.6 && lon < -84.4) return playlists.lexington;
-    if (lat > 36.0 && lat < 36.2 && lon > -86.9 && lon < -86.6) return playlists.nashville;
-    if (lat > 32.3 && lat < 32.5 && lon > -86.4 && lon < -86.1) return playlists.montgomery;
-    if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
-    if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
-    if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
+    if (lat > 38.2 && lat < 38.4 && lon > -85.9 && lon < -85.5) return "newalbany";
+    if (lat > 38.0 && lat < 38.1 && lon > -84.6 && lon < -84.4) return "lexington";
+    if (lat > 36.0 && lat < 36.2 && lon > -86.9 && lon < -86.6) return "nashville";
+    if (lat > 32.3 && lat < 32.5 && lon > -86.4 && lon < -86.1) return "montgomery";
+    if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return "gatlinburg";
+    if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return "birmingham";
+    if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return "gulfshores";
 
-    return playlists.fallback;
+    return "fallback";
   }
 
-  function showSpotifyButton(playlist) {
+  function renderAllPlaylists(matchingKey) {
     const container = document.getElementById('player-container');
-    container.innerHTML = `
-      <p style="margin-bottom: 10px; font-weight: bold;">🎧 ${playlist.label}</p>
-      <a href="${playlist.url}" target="_blank">
-        <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 200px; max-width: 90%; cursor: pointer;">
-      </a>
-    `;
+    container.innerHTML = '';
+
+    Object.keys(playlists).forEach((key) => {
+      const { url, label } = playlists[key];
+      const isCurrent = key === matchingKey;
+      const row = document.createElement('div');
+      row.style.display = "flex";
+      row.style.alignItems = "center";
+      row.style.justifyContent = "center";
+      row.style.gap = "12px";
+      row.style.marginBottom = "10px";
+      row.style.flexWrap = "wrap";
+
+      const text = document.createElement('span');
+      text.textContent = `${isCurrent ? '⭐ ' : ''}${label}`;
+      text.style.fontWeight = isCurrent ? "bold" : "normal";
+
+      const button = document.createElement('a');
+      button.href = url;
+      button.target = "_blank";
+      button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 28px; cursor: pointer;">`;
+
+      row.appendChild(text);
+      row.appendChild(button);
+      container.appendChild(row);
+    });
   }
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const playlist = matchLocation(position.coords.latitude, position.coords.longitude);
-        showSpotifyButton(playlist);
+        const key = matchLocation(position.coords.latitude, position.coords.longitude);
+        renderAllPlaylists(key);
       },
       () => {
         console.warn("Geolocation failed. Using fallback.");
-        showSpotifyButton(playlists.fallback);
+        renderAllPlaylists("fallback");
       }
     );
   } else {
     console.warn("Geolocation not supported. Using fallback.");
-    showSpotifyButton(playlists.fallback);
+    renderAllPlaylists("fallback");
   }
 </script>
 
