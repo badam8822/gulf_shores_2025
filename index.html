@@ -133,12 +133,16 @@ container.innerHTML = `
   </div>`;
   }
 
-  function matchLocation(lat, lon) {
-    if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
-    if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
-    if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
-    return playlists.fallback;
-  }
+ function matchLocation(lat, lon) {
+  if (lat > 38.2 && lat < 38.4 && lon > -85.9 && lon < -85.5) return playlists.newalbany;
+  if (lat > 38.0 && lat < 38.1 && lon > -84.6 && lon < -84.4) return playlists.lexington;
+  if (lat > 36.0 && lat < 36.2 && lon > -86.9 && lon < -86.6) return playlists.nashville;
+  if (lat > 32.3 && lat < 32.5 && lon > -86.4 && lon < -86.1) return playlists.montgomery;
+  if (lat > 35.6 && lat < 35.8 && lon > -83.6 && lon < -83.4) return playlists.gatlinburg;
+  if (lat > 33.4 && lat < 33.6 && lon > -86.9 && lon < -86.7) return playlists.birmingham;
+  if (lat > 30.2 && lat < 30.4 && lon > -87.7 && lon < -87.5) return playlists.gulfshores;
+  return playlists.fallback;
+}
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
