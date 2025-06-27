@@ -164,7 +164,7 @@
     return "fallback";
   }
 
-  function renderAllPlaylists(matchingKey) {
+ function renderAllPlaylists(matchingKey) {
   const container = document.getElementById('player-container');
   container.innerHTML = '';
 
@@ -187,18 +187,20 @@
     row.style.display = "flex";
     row.style.alignItems = "center";
     row.style.justifyContent = "center";
-    row.style.gap = "12px";
-    row.style.marginBottom = "10px";
+    row.style.gap = "16px";
+    row.style.marginBottom = "16px";
     row.style.flexWrap = "wrap";
 
     const text = document.createElement('span');
     text.textContent = `${isCurrent ? '⭐ ' : ''}${label}`;
-    text.style.fontWeight = isCurrent ? "bold" : "normal";
+    text.style.fontWeight = isCurrent ? "bold" : "600";
+    text.style.fontSize = "1.3rem";
+    text.style.color = isCurrent ? "#ff6600" : "#333";
 
     const button = document.createElement('a');
     button.href = url;
     button.target = "_blank";
-    button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 28px; cursor: pointer;">`;
+    button.innerHTML = `<img src="open_in_spotify.png" alt="Open in Spotify" style="width: 42px; cursor: pointer;">`;
 
     row.appendChild(text);
     row.appendChild(button);
