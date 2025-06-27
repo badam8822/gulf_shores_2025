@@ -112,28 +112,39 @@
 
 <script>
   const playlists = {
-    newalbany: "https://open.spotify.com/embed/playlist/37i9dQZF1DWZIQ6QMQeU3v",       // Feelin' Good
-    lexington: "https://open.spotify.com/embed/playlist/37i9dQZF1DX2RxBh64BHjQ",       // Acoustic Chill
-    nashville: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWv6MSZULLBi",       // Indie Twang
-    montgomery: "https://open.spotify.com/embed/playlist/37i9dQZF1DXd9rSDyQguIk",      // Southern Soul BBQ
-    gatlinburg: "https://open.spotify.com/embed/playlist/37i9dQZF1DX1tyCD9QhIWF",      // Mountain Vibes
-    birmingham: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6FeZRdFM7yW",      // Southern Rock
-    gulfshores: "https://open.spotify.com/embed/playlist/37i9dQZF1DX0SM0LYsmbMT",      // Beach Vibes
-    fallback: "https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0"         // General Roadtrip
+    newalbany: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DWZIQ6QMQeU3v",
+      label: "Feelin' Good – New Albany"
+    },
+    lexington: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DX2RxBh64BHjQ",
+      label: "Acoustic Chill – Lexington"
+    },
+    nashville: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DWWv6MSZULLBi",
+      label: "Indie Twang – Nashville"
+    },
+    montgomery: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DXd9rSDyQguIk",
+      label: "Southern Soul BBQ – Montgomery"
+    },
+    gatlinburg: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DX1tyCD9QhIWF",
+      label: "Mountain Vibes – Gatlinburg"
+    },
+    birmingham: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DX6FeZRdFM7yW",
+      label: "Southern Rock – Birmingham"
+    },
+    gulfshores: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DX0SM0LYsmbMT",
+      label: "Beach Vibes – Gulf Shores"
+    },
+    fallback: {
+      url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
+      label: "General Roadtrip Playlist"
+    }
   };
-
-  function setPlayer(url) {
-    const container = document.getElementById('player-container');
-    const link = url.replace('/embed', ''); // Convert to non-embed version
-
-    container.innerHTML = `
-      <iframe src="${url}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
-      <div style="margin-top: 15px;">
-        <a href="${link}" target="_blank">
-          <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 200px; max-width: 90%; cursor: pointer;">
-        </a>
-      </div>`;
-  }
 
   function matchLocation(lat, lon) {
     console.log(`Detected location: lat=${lat}, lon=${lon}`);
@@ -153,25 +164,30 @@
     return playlists.fallback;
   }
 
+  function showSpotifyButton(playlist) {
+    const container = document.getElementById('player-container');
+    container.innerHTML = `
+      <p style="margin-bottom: 10px; font-weight: bold;">🎧 ${playlist.label}</p>
+      <a href="${playlist.url}" target="_blank">
+        <img src="open_in_spotify.png" alt="Open in Spotify" style="width: 200px; max-width: 90%; cursor: pointer;">
+      </a>
+    `;
+  }
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const url = matchLocation(position.coords.latitude, position.coords.longitude);
-        if (url) {
-          setPlayer(url);
-        } else {
-          console.warn("No matching location. Using fallback.");
-          setPlayer(playlists.fallback);
-        }
+        const playlist = matchLocation(position.coords.latitude, position.coords.longitude);
+        showSpotifyButton(playlist);
       },
       () => {
         console.warn("Geolocation failed. Using fallback.");
-        setPlayer(playlists.fallback);
+        showSpotifyButton(playlists.fallback);
       }
     );
   } else {
     console.warn("Geolocation not supported. Using fallback.");
-    setPlayer(playlists.fallback);
+    showSpotifyButton(playlists.fallback);
   }
 </script>
 
